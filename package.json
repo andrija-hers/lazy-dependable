@@ -1,0 +1,27 @@
+{
+  "name": "lazy-dependable",
+  "version": "0.1.0",
+  "description": "Implementation of dependable with lazy dependency resolution",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andrija-hers/lazy-dependable.git"
+  },
+  "dependencies": {
+    "dependable-list": "latest"
+  },
+  "keywords": [
+    "dependencies",
+    "resolving",
+    "iterating"
+  ],
+  "author": "Andrija Petrovic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrija-hers/lazy-dependable/issues"
+  },
+  "homepage": "https://github.com/andrija-hers/lazy-dependable"
+}
