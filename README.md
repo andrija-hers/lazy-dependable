@@ -61,15 +61,13 @@ container.resolve(function(connection){/*use connection*/});
 **tldr**: if `resolve` gets a function as a first parameter, it will stringify/parse it to read the names of dependables you need.
 
 ##### Chain dependency providers
-You cannot register functions that will depend on other dependencies, but you can still do the chaining. For example, if you cannot provide a connection object until you get the configuration, you should
+You can register functions that will depend on other dependencies and chain dependency providers. For example, if you cannot provide a `database` without obtaining a `configuration` first, you register your `database` provider in the following manner:
 ```javascript
-function connection(configuration){
-//use configuration and finally
-  return configobject;
-}
-
-container.resolve('configuration',function(configuration){
-  container.register('connection',connection.bind(null,configuration));
+container.register('database',function(configuration){
+  //use the configuration to produce your database connection
+  var database = createDatabase(configuration);
+  //and finally
+  return database;
 });
 ```
 
