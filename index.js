@@ -34,7 +34,7 @@ Dependable.prototype.destroy = function(){
   if(this.container.resolved[this.name] === this){
     delete this.container.resolved[this.name];
   }
-  if(this.container.unresolved[this.name] === this){
+  if(this.container.unresolved && this.container.unresolved[this.name] === this){
     delete this.container.unresolved[this.name];
   }
   this.resolved = null;
