@@ -34,7 +34,7 @@ Dependable.prototype.destroy = function(){
   if(this.container.resolved[this.name] === this){
     delete this.container.resolved[this.name];
   }
-  if(this.container.unresolved && this.container.unresolved[this.name] === this){
+  if(this.container.unresolved[this.name] === this){
     delete this.container.unresolved[this.name];
   }
   this.resolved = null;
@@ -50,6 +50,7 @@ Dependable.prototype.resolve = function(){
   traverseArrayConditionally(this.deps,this.tryResolve.bind(this))
   if(null !== this.resolved){
     if(this.resolved.length!==this.deps.length){
+      console.log('my deps',require('util').inspect(this.deps,{depth:null}));
       throw 'How come there is '+this.resolved.length+' resolveds on '+this.deps.length+' deps?';
     }
     this.onResolved();
@@ -172,6 +173,10 @@ Container.prototype.get = function(depname){
   }
 };
 Container.prototype.resolve = function(consumer){
+  if(typeof consumer === 'undefined'){
+    throw 'Container got an "undefined" to resolve';
+    return;
+  }
   if(typeof consumer === 'function'){
     //dodado...
     return;
