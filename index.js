@@ -31,10 +31,10 @@ function Dependable(container,deps,action){
   this.resolved = null;
 }
 Dependable.prototype.destroy = function(){
-  if(this.container.resolved[this.name] === this){
+  if(this.container.resolved && this.container.resolved[this.name] === this){
     delete this.container.resolved[this.name];
   }
-  if(this.container.unresolved[this.name] === this){
+  if(this.container.unresolved && this.container.unresolved[this.name] === this){
     delete this.container.unresolved[this.name];
   }
   this.resolved = null;
@@ -208,6 +208,15 @@ Container.prototype.notifyResolved = function(dependable){
     if(!c.action){continue;}
     c.resolve();
   }
+};
+Container.prototype.unregister = function(depname){
+  var r = this.resolved[depname];
+  if(r){
+    destroyAndDelete(this.resolved,depname);
+  }
+  this.consumers.forEach(function(consumer){
+    console.log(consumer);
+  });
 };
 
 module.exports = {
